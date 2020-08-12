@@ -12,7 +12,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+
+			baseURL: "https://swapi.dev/api/",
+
+			swPeople: [],
+
+			swPlanets: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -37,6 +43,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			GetSWData: async URLAddition => {
+				const store = getStore();
+				const peopleList = await fetch(`${store.baseURL}${URLAddition}`);
+				const list = await peopleList.json();
+				return list.results;
+			},
+			SetSWPeople: list => {
+				setStore({ swPeople: list });
+			},
+
+			SetSWPlanets: list => {
+				setStore({ swPlanets: list });
 			}
 		}
 	};

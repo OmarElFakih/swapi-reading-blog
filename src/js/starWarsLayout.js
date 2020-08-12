@@ -1,10 +1,12 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import injectContext from "./store/appContext";
+//import { Context } from "./store/appContext";
 
 import { SWHome } from "./views/swHome";
 import { SWPerson } from "./views/swPerson";
 import { SWPlanet } from "./views/swPlanet";
+//import { useEffect } from "react";
 
 const SWLayout = () => {
 	const basename = process.env.BASENAME || "";
