@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { SWPeopleCard } from "../component/starWarsPeopleCard";
+import { SWPlanetCard } from "../component/starWarsPlanetCard";
 import { FavList } from "../component/favoriteList";
 
 export function SWHome() {
@@ -27,9 +28,16 @@ export function SWHome() {
 				<h1>Home</h1>
 				<FavList />
 			</div>
-			<div style={{ overflowX: "auto" }}>
+			<h3>People</h3>
+			<div style={{ overflowX: "auto", whiteSpace: "nowrap", display: "flex" }}>
 				{store.swPeople.map(current => {
 					return <SWPeopleCard character={current} key={current.name} />;
+				})}
+			</div>
+			<h3>Planets</h3>
+			<div style={{ overflowX: "auto", whiteSpace: "nowrap", display: "flex" }}>
+				{store.swPlanets.map(current => {
+					return <SWPlanetCard planet={current} key={current.name} />;
 				})}
 			</div>
 		</>

@@ -62,11 +62,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			AddToFavorites: (swObject, objType) => {
 				const store = getStore();
-				let listEntry = {
-					stringToPush: `/${objType}/${swObject.name}`,
-					stringToDisplay: swObject.name
-				};
-				setStore({ favorites: [...store.favorites, listEntry] });
+				let found = store.favorites.find(element => element.stringToDisplay == swObject.name);
+				if (found == undefined) {
+					let listEntry = {
+						stringToPush: `/${objType}/${swObject.name}`,
+						stringToDisplay: swObject.name
+					};
+					setStore({ favorites: [...store.favorites, listEntry] });
+				}
 			},
 
 			RemoveFromFavorites: name => {
