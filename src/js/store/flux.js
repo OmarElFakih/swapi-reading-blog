@@ -18,7 +18,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			swPeople: [],
 
-			swPlanets: []
+			swPlanets: [],
+
+			favorites: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -56,6 +58,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			SetSWPlanets: list => {
 				setStore({ swPlanets: list });
+			},
+
+			AddToFavorites: (swObject, objType) => {
+				const store = getStore();
+				let listEntry = {
+					stringToPush: `/${objType}/${swObject.name}`,
+					stringToDisplay: swObject.name
+				};
+				setStore({ favorites: [...store.favorites, listEntry] });
+			},
+
+			RemoveFromFavorites: name => {
+				const store = getStore();
+				let filteredList = store.favorites.filter(current => name != current.stringToDisplay);
+
+				setStore({ favorites: filteredList });
+				console.log(`Remove From favorites has been called with ${name}`);
 			}
 		}
 	};
